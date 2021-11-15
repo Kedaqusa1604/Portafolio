@@ -1,18 +1,58 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <BasicLayout>
+    <div class="head">
+      <div class="info">
+        <h1>Kevin Daniel Quijano S.</h1>
+        <p>Desarrollador web front end</p>
+      </div>
+    </div>
+    <a name="sobre_mi"></a>
+    <SobreMi />
+    <a name="contacto"></a>
+    <Contacto />
+  </BasicLayout>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import BasicLayout from "../layouts/BasicLayout.vue";
+import SobreMi from "../components/sections/SobreMi.vue";
+import Contacto from "../components/sections/Contacto.vue";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-    HelloWorld
+    BasicLayout,
+    SobreMi,
+    Contacto,
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+$texto: #f5dabb;
+.head {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background: rgba(#202f4e, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .info {
+    width: fit-content;
+    color: $texto;
+    text-align: center;
   }
 }
-</script>
+.head:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/fondo.jpg");
+  background-size: cover;
+  opacity: 0.5;
+  z-index: -1;
+}
+</style>
