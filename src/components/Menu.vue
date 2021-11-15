@@ -87,14 +87,15 @@ $gris: rgba(0, 0, 0, 0.2);
     }
     ul {
       // width: 300px;
+      border: 1px solid $gris;
       width: 100%;
-      background: $azulTexto;
+      background: $blanco_2;
       position: absolute;
       top: 100%;
       right: -100%;
       z-index: 10;
       padding: 0 10px;
-      // padding-bottom: 10px;
+      padding-bottom: 10px;
       height: auto;
       overflow: hidden;
       transition: all ease 1s;
@@ -111,7 +112,7 @@ $gris: rgba(0, 0, 0, 0.2);
           width: 100%;
           padding: 10px 20px;
           border-bottom: 1px solid $gris;
-          color: $blanco_2;
+          color: $azulTexto;
           font-weight: bold;
           &:hover {
             background: $gris;
