@@ -22,7 +22,6 @@ export default {
     curso: Object,
   },
   setup(props) {
-    const imagen = props.curso.imagen;
     const link = props.curso.link;
     const nombre = props.curso.nombre;
     const plataforma = props.curso.plataforma;
@@ -31,7 +30,6 @@ export default {
     const inicio = props.curso.inicio;
     const fin = props.curso.fin;
     return {
-      imagen,
       link,
       nombre,
       plataforma,
@@ -55,6 +53,7 @@ $gris_Oscuro: rgba(0, 0, 0, 0.5);
 $amarillo: #f7df1e;
 $verde: #41b883;
 $rojo: #c3002f;
+
 .card {
   width: 250px;
   min-height: 200px;
@@ -62,6 +61,7 @@ $rojo: #c3002f;
   margin: 10px 20px;
   padding: 20px 10px;
   border: 1px solid $gris;
+  position: relative;
   h2 {
     display: inline-block;
     text-align: center;
@@ -71,6 +71,7 @@ $rojo: #c3002f;
     font-size: 17px;
     a {
       color: $azulTexto;
+      transition: all 0.5s ease;
       &:hover {
         color: $gris_Oscuro;
       }
@@ -80,6 +81,16 @@ $rojo: #c3002f;
     strong {
       color: $azulTexto;
     }
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -10px;
+    left: -10px;
+    background: $blanco_2;
+    z-index: -1;
   }
 }
 </style>

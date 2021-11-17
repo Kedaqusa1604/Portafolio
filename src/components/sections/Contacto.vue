@@ -17,11 +17,11 @@
             size="2x"
           />LinkedIn</a
         >
-        <a
+        <!-- <a
           href="https://api.whatsapp.com/send?phone=573144399846"
           target="blank"
           ><fa class="icono" :icon="['fab', 'whatsapp']" size="2x" />WhatsApp</a
-        >
+        > -->
       </div>
     </div>
   </div>
@@ -80,7 +80,7 @@ a {
   align-items: center;
   justify-content: space-around;
   position: relative;
-
+  transition: all 0.5s ease;
   &:hover {
     color: $blanco_2;
     background: $gris;

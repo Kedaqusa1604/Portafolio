@@ -49,8 +49,8 @@ $rojo: #c3002f;
   color: $verde;
 }
 
-.red {
-  color: $rojo;
+.orange {
+  color: #f05033;
 }
 
 .card {

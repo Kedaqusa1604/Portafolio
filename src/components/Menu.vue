@@ -8,7 +8,7 @@
       <ul :class="{ 'is-Visible': isActive }">
         <li><a href="#sobre_mi" @click="activeMenu">Sobre mí</a></li>
         <li>
-          <router-link to="/" @click="activeMenu">Portafolio</router-link>
+          <a href="#portafolio" @click="activeMenu">Portafolio</a>
         </li>
         <li><a href="#contacto" @click="activeMenu">Contacto</a></li>
         <li><router-link to="/" @click="activeMenu">Acerca de</router-link></li>

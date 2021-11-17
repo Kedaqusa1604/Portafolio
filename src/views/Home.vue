@@ -27,6 +27,8 @@
     </div>
     <a name="sobre_mi"></a>
     <SobreMi />
+    <a name="portafolio"></a>
+    <Portafolio />
     <a name="contacto"></a>
     <Contacto />
   </BasicLayout>
@@ -36,12 +38,14 @@
 import BasicLayout from "../layouts/BasicLayout.vue";
 import SobreMi from "../components/sections/SobreMi.vue";
 import Contacto from "../components/sections/Contacto.vue";
+import Portafolio from "../components/sections/Portafolio.vue";
 export default {
   name: "Home",
   components: {
     BasicLayout,
     SobreMi,
     Contacto,
+    Portafolio,
   },
 };
 </script>
