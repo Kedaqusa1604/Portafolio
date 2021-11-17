@@ -4,19 +4,23 @@
       <h2>Contáctame por</h2>
       <div class="description">
         <a href="mailto:kevind.quijanos@gmail.com" target="blank"
-          ><fa :icon="['fas', 'envelope']" size="2x" /> E-mail</a
+          ><fa class="icono" :icon="['fas', 'envelope']" size="2x" /> E-mail</a
         >
         <a href="https://github.com/Kedaqusa1604" target="blank"
-          ><fa :icon="['fab', 'github']" size="2x" />
+          ><fa class="icono" :icon="['fab', 'github']" size="2x" />
           GitHub
         </a>
         <a href="https://www.linkedin.com/in/kevindquijanos1604/" target="blank"
-          ><fa :icon="['fab', 'linkedin-in']" size="2x" />LinkedIn</a
+          ><fa
+            class="icono"
+            :icon="['fab', 'linkedin-in']"
+            size="2x"
+          />LinkedIn</a
         >
         <a
           href="https://api.whatsapp.com/send?phone=573144399846"
           target="blank"
-          ><fa :icon="['fab', 'whatsapp']" size="2x" />WhatsApp</a
+          ><fa class="icono" :icon="['fab', 'whatsapp']" size="2x" />WhatsApp</a
         >
       </div>
     </div>
@@ -80,6 +84,21 @@ a {
   &:hover {
     color: $blanco_2;
     background: $gris;
+  }
+}
+@media screen and (max-width: 480px) {
+  .description {
+    justify-content: center;
+  }
+  a {
+    align-self: center;
+    width: 60%;
+    justify-content: center;
+    padding: 5px 20px;
+    .icono {
+      // background: chartreuse;
+      margin-right: 50px;
+    }
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="contenido">
-    <div class="encabezado" id="Sobre_Mi">
+    <div class="head" id="Sobre_Mi">
       <h2>Sobre mí</h2>
     </div>
     <!-- Perfil profesional -->
@@ -164,8 +164,51 @@ $azulTexto: #1f3c5d;
 $beige: #f5dabb;
 $blanco_2: #f5f5f5;
 $blanco_1: #fff;
+$blanco_3: #e6e9ed;
 $gris: rgba(0, 0, 0, 0.2);
 $azulFondo: #202f4e;
+
+// azul
+$azul_5: #162b42;
+$azul_4: #234369;
+$azul_3: #386ca8;
+$azul_2: #4d95e8;
+$azul_1: #1f3c5d;
+
+.head {
+  width: 100%;
+  background: $blanco_3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 3px solid $azul_4;
+  position: relative;
+  &:before {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 30%;
+    width: 35%;
+    height: 3px;
+    background: $azul_3;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 65%;
+    width: 35%;
+    height: 3px;
+    background: $azul_2;
+  }
+  h2 {
+    height: 100%;
+    color: $azulTexto;
+    display: block;
+    padding: 10px 20px;
+  }
+}
 .blanco1 {
   background: $blanco_1;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="nav" :class="{ 'no-Overflow': isActive }">
     <nav>
-      <h2>Prueba</h2>
+      <h2>KevinQuijanoWeb.com (En construcción)</h2>
       <button @click="activeMenu">
         <fa :icon="changeIcon()" size="2x" />
       </button>
