@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <a name="sobre_mi"></a>
+    <div id="sobre_mi"></div>
     <SobreMi />
     <a name="portafolio"></a>
     <Portafolio />

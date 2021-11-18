@@ -6,12 +6,31 @@
         <fa :icon="changeIcon()" size="2x" />
       </button>
       <ul :class="{ 'is-Visible': isActive }">
-        <li><a href="#sobre_mi" @click="activeMenu">Sobre mí</a></li>
         <li>
-          <a href="#portafolio" @click="activeMenu">Portafolio</a>
+          <router-link
+            :to="{ name: 'Home' }"
+            @click="activeMenu"
+            :class="{ item_Activo: $route.name === 'Home' }"
+            >Inicio</router-link
+          >
+          <div v-if="$route.name === 'Home'">
+            <ol>
+              <li>
+                <a href="#sobre_mi" @click="activeMenu">Sobre mi</a>
+              </li>
+              <li><a href="#portafolio" @click="activeMenu">Portafolio </a></li>
+              <li><a href="#contacto" @click="activeMenu">Contacto</a></li>
+            </ol>
+          </div>
         </li>
-        <li><a href="#contacto" @click="activeMenu">Contacto</a></li>
-        <li><router-link to="/" @click="activeMenu">Acerca de</router-link></li>
+        <li>
+          <router-link
+            :to="{ name: 'About' }"
+            @click="activeMenu"
+            :class="{ item_Activo: $route.name === 'About' }"
+            >Acerca de</router-link
+          >
+        </li>
       </ul>
     </nav>
   </div>
@@ -49,11 +68,14 @@ $beige: #f5dabb;
 $blanco_2: #f5f5f5;
 $blanco_1: #fff;
 $gris: rgba(0, 0, 0, 0.2);
+$blanco_3: #e6e9ed;
 
+//azul
 .nav {
   background: $azulTexto;
   width: 100%;
   height: 50px;
+  // height: 100vh;
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -107,6 +129,7 @@ $gris: rgba(0, 0, 0, 0.2);
       }
       li {
         list-style: none;
+        margin-bottom: 5px;
         a {
           display: inline-block;
           width: 100%;
@@ -118,6 +141,26 @@ $gris: rgba(0, 0, 0, 0.2);
             background: $gris;
           }
         }
+        ol {
+          width: auto;
+          margin: 10px 10%;
+        }
+      }
+    }
+    .item_Activo {
+      position: relative;
+      background: $blanco_3;
+      &:before {
+        content: "";
+        position: absolute;
+        width: 5px;
+        height: 100%;
+        background: $azulTexto;
+        bottom: 0;
+        left: 0;
+      }
+      &:hover {
+        background: $blanco_3;
       }
     }
 
