@@ -76,7 +76,7 @@ $blanco_3: #e6e9ed;
   width: 100%;
   height: 50px;
   // height: 100vh;
-  overflow: hidden;
+  // overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
