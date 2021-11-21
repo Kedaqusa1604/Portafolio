@@ -1,35 +1,42 @@
 <template>
-  <div class="nav" :class="{ 'no-Overflow': isActive }">
-    <nav>
-      <h2>KevinQuijanoWeb.com (En construcción)</h2>
-      <button @click="activeMenu">
-        <fa :icon="changeIcon()" size="2x" />
+  <div class="header">
+    <nav class="nav-bar" :class="{ 'nav-bar_Active': isActive }">
+      <div class="nav-bar-logo">
+        <h2>KevinQuijanoWeb.com (En construcción)</h2>
+      </div>
+      <button class="nav-bar-button" @click="changeStateMenu()">
+        <fa :icon="returnIcon()" size="2x" />
       </button>
-      <ul :class="{ 'is-Visible': isActive }">
-        <li>
-          <router-link
-            :to="{ name: 'Home' }"
-            @click="activeMenu"
-            :class="{ item_Activo: $route.name === 'Home' }"
-            >Inicio</router-link
+      <ul class="nav-bar-list" :class="{ 'nav-bar-list_Active': isActive }">
+        <li class="nav-bar-item">
+          <template v-if="$route.name === 'Home'">
+            <a href="#" @click="changeStateMenu()"><strong>Inicio</strong></a>
+          </template>
+          <template v-else>
+            <router-link :to="{ name: 'Home' }" @click="changeStateMenu()">
+              <strong>Inicio</strong>
+            </router-link>
+          </template>
+
+          <div
+            class="nav-bar-submenu"
+            :class="{ 'nav-bar-submenu_no-visible': $route.name !== 'Home' }"
           >
-          <div v-if="$route.name === 'Home'">
-            <ol>
-              <li>
-                <a href="#sobre_mi" @click="activeMenu">Sobre mi</a>
-              </li>
-              <li><a href="#portafolio" @click="activeMenu">Portafolio </a></li>
-              <li><a href="#contacto" @click="activeMenu">Contacto</a></li>
-            </ol>
+            <li class="nav-bar-submenu-item">
+              <a href="#sobre_mi" @click="changeStateMenu()">Sobre Mi</a>
+            </li>
+            <li class="nav-bar-submenu-item">
+              <a href="#portafolio" @click="changeStateMenu()">Portafolio</a>
+            </li>
+            <li class="nav-bar-submenu-item">
+              <a href="#contacto" @click="changeStateMenu()">Contacto</a>
+            </li>
           </div>
         </li>
-        <li>
-          <router-link
-            :to="{ name: 'About' }"
-            @click="activeMenu"
-            :class="{ item_Activo: $route.name === 'About' }"
-            >Acerca de</router-link
-          >
+        <li class="nav-bar-item">
+          <router-link :to="{ name: 'About' }" @click="changeStateMenu()">
+            <strong>Acerca de</strong>
+          </router-link>
         </li>
       </ul>
     </nav>
@@ -40,23 +47,24 @@
 import { ref } from "vue";
 export default {
   name: "Menu",
+
   setup() {
     const isActive = ref(false);
-    const activeMenu = () => {
-      isActive.value = !isActive.value;
-      console.log(isActive.value);
-    };
-    const changeIcon = () => {
+    const returnIcon = () => {
       if (isActive.value) {
         return ["fas", "times"];
       } else {
         return ["fas", "bars"];
       }
     };
+    const changeStateMenu = () => {
+      isActive.value = !isActive.value;
+      console.log(isActive.value);
+    };
     return {
+      changeStateMenu,
       isActive,
-      activeMenu,
-      changeIcon,
+      returnIcon,
     };
   },
 };
@@ -64,196 +72,156 @@ export default {
 
 <style lang="scss" scoped>
 $azulTexto: #1f3c5d;
-$beige: #f5dabb;
 $blanco_2: #f5f5f5;
-$blanco_1: #fff;
 $gris: rgba(0, 0, 0, 0.2);
-$blanco_3: #e6e9ed;
 
-//azul
-.nav {
-  background: $azulTexto;
+@mixin enlaces() {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $blanco_2;
+  font-size: 16px;
+  padding: 0 10px;
+  transition: all 0.7s ease;
+  font-weight: bold;
+  &:hover {
+    background: $gris;
+  }
+}
+
+.header {
   width: 100%;
-  height: 50px;
-  // height: 100vh;
-  // overflow: hidden;
+  background: transparent;
+  height: 60px;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 10;
-  &.no-Overflow {
-    overflow: inherit;
-  }
-  nav {
-    width: 100%;
-    max-width: 1000px;
-    margin: auto;
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 20px;
-    position: relative;
-    h2 {
-      // background: chartreuse;
-      color: $blanco_2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      font-size: 17px;
-      text-align: center;
-    }
-    button {
-      margin: 0;
-      align-self: center;
-    }
-    ul {
-      // width: 300px;
-      border: 1px solid $gris;
-      width: 100%;
-      background: $blanco_2;
-      position: absolute;
-      top: 100%;
-      right: -100%;
-      z-index: 10;
-      padding: 0 10px;
-      padding-bottom: 10px;
-      height: auto;
-      overflow: hidden;
-      transition: all ease 1s;
-      visibility: hidden;
-      &.is-Visible {
-        visibility: visible;
-        right: 0;
-        transition: all ease 1s;
-      }
-      li {
-        list-style: none;
-        margin-bottom: 5px;
-        a {
-          display: inline-block;
-          width: 100%;
-          padding: 10px 20px;
-          border-bottom: 1px solid $gris;
-          color: $azulTexto;
-          font-weight: bold;
-          &:hover {
-            background: $gris;
-          }
-        }
-        ol {
-          width: auto;
-          margin: 10px 10%;
-        }
-      }
-    }
-    .item_Activo {
-      position: relative;
-      background: $blanco_3;
-      &:before {
-        content: "";
-        position: absolute;
-        width: 5px;
-        height: 100%;
-        background: $azulTexto;
-        bottom: 0;
-        left: 0;
-      }
-      &:hover {
-        background: $blanco_3;
-      }
-    }
-
-    // ul {
-    //   width: 0;
-    //   overflow: hidden;
-    //   transition: all 0.5 ease;
-    //   display: flex;
-
-    //   li {
-    //     width: 100px;
-    //     background: rosybrown;
-    //     list-style: none;
-
-    //     a {
-    //       display: inline-block;
-    //       padding: 10px 5px;
-    //       text-align: center;
-    //       height: 100%;
-    //       width: 100%;
-    //       color: $blanco_2;
-    //       font-weight: bold;
-    //       &:hover {
-    //         color: $blanco_2;
-    //         background: $gris;
-    //       }
-    //     }
-    //   }
-    //   &.is-Visible {
-    //     width: auto;
-    //   }
-    // }
-  }
+  // background: red;
 }
-
-button {
-  height: fit-content;
+.nav-bar {
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;
+  padding: 0 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin: auto;
-  border-style: none;
-  outline: none;
+  transition: all 0.7s ease;
+}
+
+.nav-bar-logo {
+  height: 100%;
+  width: max-content;
+  margin-right: 20px;
+  h2 {
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    font-size: 18px;
+    text-align: center;
+    color: $blanco_2;
+  }
+}
+
+.nav-bar-button {
   background: none;
-  color: $blanco_2;
-  &:hover {
-    cursor: pointer;
+  border: none;
+  width: max-content;
+  height: fit-content;
+  display: none;
+}
+
+.nav-bar-list,
+.nav-bar-submenu {
+  display: flex;
+}
+
+.nav-bar-submenu {
+  height: 100%;
+  .nav-bar-submenu-item {
+    display: flex;
   }
 }
 
-@media screen and (max-width: 800px) {
-  .is-Visible {
+.nav-bar-submenu_no-visible {
+  display: none;
+}
+
+.nav-bar-item,
+.nav-bar-submenu-item {
+  list-style: none;
+}
+
+.nav-bar-item {
+  display: flex;
+  a {
+    @include enlaces();
+  }
+}
+
+@media screen and (max-width: 900px) {
+  @mixin nav-item() {
+    color: $azulTexto;
+    border-bottom: 1px solid $gris;
+  }
+  .nav-bar-button {
+    display: inline-block;
+    margin: auto 0;
+    color: $blanco_2;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .nav-bar-list {
+    width: 300px;
+    position: fixed;
+    top: 60px;
+    right: -100%;
+    align-items: center;
+    flex-direction: column;
+    padding: 10px;
+    transition: all 0.7s ease;
+    background: rgba($blanco_2, 0.8);
+    overflow: scroll;
+  }
+
+  .nav-bar_Active {
+    background: $azulTexto;
+  }
+
+  .nav-bar-list_Active {
+    right: 0px;
+  }
+
+  .nav-bar-item {
+    flex-direction: column;
     width: 100%;
+    a {
+      padding: 10px 30px;
+      width: 100%;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+      font-weight: normal;
+      @include nav-item();
+    }
+
+    .nav-bar-submenu {
+      flex-direction: column;
+      width: 80%;
+      align-self: flex-end;
+    }
   }
 }
 
-// $azulFondo: #202f4e;
-// $fondo: #202f4e;
-// $texto: #fff;
-// $texto_hover: #f5dabb;
-
-// .nav {
-//   width: 100%;
-//   height: 50px;
-//   background: $fondo;
-//   nav,
-//   ul,
-//   li,
-//   a {
-//     height: 100%;
-//   }
-//   nav {
-//     width: 100%;
-//     max-width: 1000px;
-//     margin: auto;
-//     ul {
-//       display: flex;
-//       float: right;
-//       li {
-//         list-style: none;
-//         a {
-//           font-size: 15px;
-//           display: flex;
-//           width: 125px;
-//           justify-content: center;
-//           align-items: center;
-//           text-align: center;
-//           text-decoration: none;
-//           color: $texto;
-//           &:hover {
-//             color: $texto_hover;
-//             border-bottom: 2px solid $texto_hover;
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
+@media screen and (max-width: 768px) {
+  .nav-bar-list {
+    width: 100%;
+    height: calc(100% - 60px);
+  }
+}
 </style>

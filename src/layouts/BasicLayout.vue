@@ -1,6 +1,7 @@
 <template>
   <div class="basicLayout">
-    <Menu class="menu" />
+    <Head />
+    <!-- <Menu :class="{ 'change-color': scroll }" /> -->
     <div class="content">
       <slot />
     </div>
@@ -9,26 +10,32 @@
 
 <script>
 import Menu from "../components/Menu.vue";
+import Head from "../components/Head.vue";
+import { onMounted, ref } from "vue";
 export default {
   name: "BasicLayout",
   components: {
     Menu,
+    Head,
   },
+  // setup() {
+  //   onMounted(() => {
+  //     window.addEventListener("scroll", changeStateScroll);
+  //   });
+  //   let scroll = ref(false);
+  //   const changeStateScroll = () => {
+  //     if (window.scrollY > 0) {
+  //       scroll.value = true;
+  //     } else {
+  //       scroll.value = false;
+  //     }
+  //   };
+  //   return {
+  //     scroll,
+  //     changeStateScroll,
+  //   };
+  // },
 };
 </script>
 
-<style lang="scss" scoped>
-// .basicLayout {
-//   display: grid;
-//   grid-template-columns: repeat(10, auto);
-
-//   .menu {
-//     grid-column-start: 1;
-//     grid-column-end: 3;
-//   }
-//   .content {
-//     grid-column-start: 3;
-//     grid-column-end: -1;
-//   }
-// }
-</style>
+<style lang="scss" scoped></style>

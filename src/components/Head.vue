@@ -1,51 +1,56 @@
 <template>
-  <BasicLayout>
-    <!-- <div class="head">
-      <div class="contain">
-        <div class="info">
-          <div class="imagen">
-            <div class="logo uno">
-              <fa class="js" :icon="['fab', 'js-square']" size="2x" />
-            </div>
-            <div class="logo dos">
-              <fa class="html" :icon="['fab', 'html5']" size="2x" />
-            </div>
-            <div class="logo tres">
-              <fa class="css" :icon="['fab', 'css3-alt']" size="2x" />
-            </div>
-            <div class="logo cuatro">
-              <fa class="vue" :icon="['fab', 'vuejs']" size="2x" />
-            </div>
-            <div class="logo cinco">
-              <fa class="git" :icon="['fab', 'git-alt']" size="2x" />
-            </div>
+  <Menu class="menu" :class="{ scroll: stateScroll }" />
+  <div class="head">
+    <div class="contain">
+      <div class="info">
+        <div class="imagen">
+          <div class="logo uno">
+            <fa class="js" :icon="['fab', 'js-square']" size="2x" />
           </div>
-          <h1>Kevin Daniel Quijano S.</h1>
-          <h2>Desarrollador web front end</h2>
+          <div class="logo dos">
+            <fa class="html" :icon="['fab', 'html5']" size="2x" />
+          </div>
+          <div class="logo tres">
+            <fa class="css" :icon="['fab', 'css3-alt']" size="2x" />
+          </div>
+          <div class="logo cuatro">
+            <fa class="vue" :icon="['fab', 'vuejs']" size="2x" />
+          </div>
+          <div class="logo cinco">
+            <fa class="git" :icon="['fab', 'git-alt']" size="2x" />
+          </div>
         </div>
+        <h1>Kevin Daniel Quijano S.</h1>
+        <h2>Desarrollador web front end</h2>
       </div>
-    </div> -->
-    <div id="sobre_mi"></div>
-    <SobreMi />
-    <a name="portafolio"></a>
-    <Portafolio />
-    <a name="contacto"></a>
-    <Contacto />
-  </BasicLayout>
+    </div>
+  </div>
 </template>
 
 <script>
-import BasicLayout from "../layouts/BasicLayout.vue";
-import SobreMi from "../components/sections/SobreMi.vue";
-import Contacto from "../components/sections/Contacto.vue";
-import Portafolio from "../components/sections/Portafolio.vue";
+import Menu from "./Menu.vue";
+import { onMounted, ref } from "vue";
 export default {
-  name: "Home",
+  name: "Head",
   components: {
-    BasicLayout,
-    SobreMi,
-    Contacto,
-    Portafolio,
+    Menu,
+  },
+  setup() {
+    onMounted(() => {
+      window.addEventListener("scroll", detectScroll);
+    });
+    const stateScroll = ref(false);
+    const detectScroll = () => {
+      if (window.scrollY > 50) {
+        stateScroll.value = true;
+      } else {
+        stateScroll.value = false;
+      }
+    };
+    return {
+      detectScroll,
+      stateScroll,
+    };
   },
 };
 </script>
@@ -70,6 +75,14 @@ $azul_4: #234369;
 $azul_3: #386ca8;
 $azul_2: #4d95e8;
 $azul_1: #1f3c5d;
+
+.scroll {
+  background: $azul_1;
+}
+
+.menu {
+  transition: all 0.7s linear;
+}
 
 .contain {
   width: 100%;
@@ -124,10 +137,20 @@ $azul_1: #1f3c5d;
 .head {
   position: relative;
   width: 100%;
-  // height: 100vh;
-  height: 400px;
+  height: 100vh;
+  max-height: 800px;
   background: $azul_5;
-  background: linear-gradient($azul_4 0%, $azul_5 100%);
+  background-image: url("../img/fondo.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  // background: linear-gradient(
+  //   to bottom,
+  //   // $azul_3 0%,
+  //   $azul_4 0%,
+  //   $azul_1 50%,
+  //   $azul_5 100%
+  // );
 
   z-index: -3;
 
@@ -138,21 +161,21 @@ $azul_1: #1f3c5d;
     position: absolute;
     bottom: 0;
     left: 0;
-    background: #122235;
-    clip-path: polygon(0% 15%, 100% 100%, 100% 100%, 0% 100%);
+    background: rgba(0, 0, 0, 0.7);
+    // clip-path: polygon(0% 15%, 100% 100%, 100% 100%, 0% 100%);
     z-index: -1;
   }
-  &:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background: rgba($blanco_2, 0.2);
-    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 100%);
-    z-index: -2;
-  }
+  // &:after {
+  //   content: "";
+  //   width: 100%;
+  //   height: 100%;
+  //   position: absolute;
+  //   bottom: 0;
+  //   left: 0;
+  //   background: rgba($blanco_2, 0.2);
+  //   clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 100%);
+  //   z-index: -2;
+  // }
 }
 
 .imagen {
@@ -200,56 +223,20 @@ $azul_1: #1f3c5d;
 .git {
   color: $naranjaGIT;
 }
-// .uno {
-//   width: 150px;
-//   height: 150px;
-//   position: absolute;
-//   top: 0;
-//   left: 0;
+// @media screen and (max-width: 720px) {
+//   .head {
+//     height: 400px;
+//   }
+//   // .info {
+//   //   width: 100%;
+//   //   justify-content: center;
+//   //   align-items: center;
+//   //   h1 {
+//   //     width: fit-content;
+//   //     align-self: center;
+//   //   }
+//   // }
 // }
-// .dos {
-//   width: 100px;
-//   height: 100px;
-//   position: absolute;
-//   top: 15%;
-//   left: 37%;
-// }
-// .tres {
-//   width: 75px;
-//   height: 75px;
-//   position: absolute;
-//   top: 35%;
-//   left: 60%;
-// }
-// .cuatro {
-//   width: 65px;
-//   height: 65px;
-//   position: absolute;
-//   top: 55%;
-//   left: 75%;
-// }
-// .cinco {
-//   width: 50px;
-//   height: 50px;
-//   position: absolute;
-//   bottom: 0;
-//   right: 0;
-// }
-
-@media screen and (max-width: 720px) {
-  .head {
-    height: 400px;
-  }
-  // .info {
-  //   width: 100%;
-  //   justify-content: center;
-  //   align-items: center;
-  //   h1 {
-  //     width: fit-content;
-  //     align-self: center;
-  //   }
-  // }
-}
 @media screen and (max-width: 690px) {
   .info {
     width: 100%;

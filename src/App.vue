@@ -1,5 +1,9 @@
 <template>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <transition name="route" mode="out-in">
+      <component :is="Component" :key="$route.path"></component>
+    </transition>
+  </router-view>
 </template>
 <script>
 export default {
@@ -16,5 +20,23 @@ export default {
   padding: 0;
   box-sizing: border-box;
   font-family: "Lato", "Poppins", sans-serif;
+}
+html {
+  scroll-behavior: smooth;
+}
+.route-enter-from {
+  opacity: 0;
+  transform: translateX(100px);
+}
+.route-enter-active {
+  transition: all 0.2s ease-out;
+}
+.route-leave-to {
+  opacity: 0;
+  transform: translateX(-100px);
+}
+
+.route-leave-active {
+  transition: all 0.2s ease-in;
 }
 </style>
