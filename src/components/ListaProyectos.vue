@@ -1,7 +1,9 @@
 <template>
-  <template v-for="proyecto in proyectos" :key="proyecto.id">
-    <Proyecto :proyecto="proyecto" />
-  </template>
+  <div class="content">
+    <template v-for="proyecto in proyectos" :key="proyecto.id">
+      <Proyecto :proyecto="proyecto" />
+    </template>
+  </div>
 </template>
 
 <script>
@@ -17,4 +19,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.content {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+@media screen and (max-width: 930px) {
+  .content {
+    justify-content: center;
+  }
+}
+</style>

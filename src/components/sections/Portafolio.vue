@@ -25,23 +25,16 @@
 
 <script>
 import ListaProyectos from "../ListaProyectos.vue";
+import { computed } from "vue";
+import { useStore } from "vuex";
 export default {
   name: "Portafolio",
   setup() {
-    const proyectos = [
-      //   {
-      //     titulo: "Lorem Ipsum",
-      //     descripcion: "Lorem Ipsum",
-      //     fecha: new Date(),
-      //   },
-      //   {
-      //     titulo: "Lorem Ipsum 2",
-      //     descripcion: "Lorem Ipsum",
-      //     fecha: new Date(),
-      //   },
-    ];
+    const store = useStore();
+    const proyectos = computed(() => store.state.proyectos);
     return {
       proyectos,
+      store,
     };
   },
   components: {
