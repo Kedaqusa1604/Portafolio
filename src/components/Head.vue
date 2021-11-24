@@ -2,26 +2,12 @@
   <Menu class="menu" :class="{ scroll: stateScroll }" />
   <div class="head">
     <div class="contain">
-      <div class="info">
-        <div class="imagen">
-          <div class="logo uno">
-            <fa class="js" :icon="['fab', 'js-square']" size="2x" />
-          </div>
-          <div class="logo dos">
-            <fa class="html" :icon="['fab', 'html5']" size="2x" />
-          </div>
-          <div class="logo tres">
-            <fa class="css" :icon="['fab', 'css3-alt']" size="2x" />
-          </div>
-          <div class="logo cuatro">
-            <fa class="vue" :icon="['fab', 'vuejs']" size="2x" />
-          </div>
-          <div class="logo cinco">
-            <fa class="git" :icon="['fab', 'git-alt']" size="2x" />
-          </div>
-        </div>
+      <div class="contain__info">
         <h1>Kevin Daniel Quijano S.</h1>
         <h2>Desarrollador web front end</h2>
+      </div>
+      <div class="contain__imagen">
+        <img src="../img/logo.png" alt="" />
       </div>
     </div>
   </div>
@@ -88,20 +74,36 @@ $azul_1: #1f3c5d;
   width: 100%;
   max-width: 1000px;
   height: 100%;
+  // height: 1000px;
+  // min-height: 400px;
   padding: 20px 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   margin: auto;
   position: relative;
-  .info {
-    align-self: flex-end;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-gap: 10px;
+  overflow: visible;
+
+  &__info {
+    // background: blue;
+    // background: red;
+    grid-column: 1/5;
+    grid-row: 1/-1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px 20px;
+    align-items: center;
     h1 {
       color: $blanco_2;
       display: block;
       position: relative;
       padding-bottom: 10px;
       border-bottom: 2px solid $azul_2;
+      // background: chartreuse;
+      width: fit-content;
+      margin-bottom: 0;
 
       &:before {
         content: "";
@@ -123,14 +125,22 @@ $azul_1: #1f3c5d;
       }
     }
     h2 {
-      color: $azul_2;
+      color: $blanco_3;
       font-size: 20px;
+      margin-top: 5px;
     }
-    // width: fit-content;
-    // text-align: center;
-    // color: $azulTexto;
-    // border: 1px solid $azulTexto;
-    // padding: 10px 20px;
+  }
+  &__imagen {
+    // background: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-column: 5/-1;
+    grid-row: 1/-1;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 }
 
@@ -138,19 +148,24 @@ $azul_1: #1f3c5d;
   position: relative;
   width: 100%;
   height: 100vh;
+  min-height: 600px;
   max-height: 800px;
   background: $azul_5;
-  background-image: url("../img/fondo.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  // background: linear-gradient(
+  // background: #005c97; /* fallback for old browsers */
+  // background: -webkit-linear-gradient(
   //   to bottom,
-  //   // $azul_3 0%,
-  //   $azul_4 0%,
-  //   $azul_1 50%,
-  //   $azul_5 100%
-  // );
+  //   #363795,
+  //   #005c97
+  // ); /* Chrome 10-25, Safari 5.1-6 */
+  // background: linear-gradient(
+  //   to top,
+  //   #363795,
+  //   #005c97
+  // ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  // background-image: linear-gradient(125deg, #30cfd0 0%, #330867 100%);
+  background-color: #0cbaba;
+  background-image: linear-gradient(210deg, #0cbaba 0%, #380036 74%);
 
   z-index: -3;
 
@@ -161,90 +176,61 @@ $azul_1: #1f3c5d;
     position: absolute;
     bottom: 0;
     left: 0;
-    background: rgba(0, 0, 0, 0.7);
-    // clip-path: polygon(0% 15%, 100% 100%, 100% 100%, 0% 100%);
+    background: rgba(0, 0, 0, 0.2);
     z-index: -1;
   }
-  // &:after {
-  //   content: "";
-  //   width: 100%;
-  //   height: 100%;
-  //   position: absolute;
-  //   bottom: 0;
-  //   left: 0;
-  //   background: rgba($blanco_2, 0.2);
-  //   clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 100%);
-  //   z-index: -2;
-  // }
 }
 
-.imagen {
-  // margin: 20px;
-  width: 100%;
-  // max-width: 600px;
-  align-self: center;
-  height: 100%;
-  max-height: 300px;
-  // padding: 50px 0;
-  display: flex;
-  flex-wrap: wrap;
-  display: flex;
-  justify-content: center;
-  // background: cyan;
-  // position: relative;
-  // right: 0;
-  // bottom: 0px;
+@media screen and(max-width:992px) {
+  .contain {
+    &__imagen {
+      // background: red;
+      grid-column: 6/-1;
+    }
+    &__info {
+      // background: blue;
+      grid-column: 1/6;
+    }
+  }
+}
+@media screen and(max-width:715px) {
+  .contain {
+    &__imagen {
+      grid-column: 1/-1;
+      grid-row: 2/9;
+      width: 100%;
+      img {
+        height: 100%;
+        // width: 100%;
+        width: auto;
+        // background: greenyellow;
+      }
+    }
+    &__info {
+      grid-column: 1/-1;
+      grid-row: 8/-1;
+    }
+  }
+  .head {
+    min-height: 0;
+    height: 500px;
+  }
 }
 
-.logo {
-  width: 50px;
-  height: 50px;
-  background: $azul_4;
-  margin: 5px;
-  padding: 5px;
-  border-radius: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.js {
-  color: $amarilloJS;
+@media screen and(max-width:372px) {
+  .contain {
+    &__info {
+      padding: 0;
+    }
+  }
 }
 
-.html {
-  color: $naranjaHTML;
-}
-.css {
-  color: $azulCSS;
-}
-.vue {
-  color: $verdeVUE;
-}
-.git {
-  color: $naranjaGIT;
-}
-// @media screen and (max-width: 720px) {
-//   .head {
-//     height: 400px;
-//   }
-//   // .info {
-//   //   width: 100%;
-//   //   justify-content: center;
-//   //   align-items: center;
-//   //   h1 {
-//   //     width: fit-content;
-//   //     align-self: center;
-//   //   }
-//   // }
-// }
-@media screen and (max-width: 690px) {
-  .info {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    h1 {
-      width: fit-content;
-      align-self: center;
+@media screen and(max-width:340px) {
+  .contain {
+    &__info {
+      h1 {
+        text-align: center;
+      }
     }
   }
 }
